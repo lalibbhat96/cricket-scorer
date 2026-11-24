@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cricket Scorer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top"><h1>Cricket Scorer</h1></header>
+
+  <main>
+    <!-- New match -->
+    <section id="setup" class="panel">
+      <h2>New match</h2>
+      <form id="setup-form">
+        <label for="teamA">Team batting first</label>
+        <input id="teamA" required maxlength="24" value="Team A">
+        <label for="teamB">Team batting second</label>
+        <input id="teamB" required maxlength="24" value="Team B">
+        <label for="overs">Overs per innings</label>
+        <input id="overs" type="number" min="1" max="50" value="10" required>
+        <button class="primary" type="submit">Start match</button>
+      </form>
+    </section>
+
+    <!-- Live scoring -->
+    <section id="game" hidden>
+      <div class="board">
+        <p id="innings-label" class="small"></p>
+        <p id="score" class="score"></p>
+        <p id="overs-line" class="small"></p>
+        <p id="chase" class="chase"></p>
+      </div>
+
+      <div class="panel">
+        <h2>This over</h2>
+        <div id="over-balls" class="balls" aria-live="polite"></div>
+      </div>
+
+      <div id="controls" class="panel">
+        <h2>Score the ball</h2>
+        <div class="grid">
+          <button data-run="0">0</button><button data-run="1">1</button>
+          <button data-run="2">2</button><button data-run="3">3</button>
+          <button data-run="4" class="boundary">4</button><button data-run="6" class="boundary">6</button>
+        </div>
+        <div class="grid two">
+          <button data-extra="wd">Wide</button>
+          <button data-extra="nb">No ball</button>
+        </div>
+        <label for="extra-runs">Extra runs on wide or no ball</label>
+        <select id="extra-runs"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        <button id="wicket" class="wicket">Wicket</button>
+      </div>
+
+      <div id="next" class="panel" hidden>
+        <p id="next-msg"></p>
+        <button id="next-btn" class="primary">Start second innings</button>
+      </div>
+
+      <div id="result" class="panel" hidden>
+        <h2 id="result-text"></h2>
+        <button id="save-btn" hidden>Save match to Supabase</button>
+        <p id="save-status" class="small" role="status"></p>
+      </div>
+
+      <div class="actions">
+        <button id="undo">Undo last ball</button>
+        <button id="reset">New match</button>
+      </div>
+
+      <div class="panel">
+        <h2>Scorecard</h2>
+        <table>
+          <thead><tr><th>Team</th><th>Runs</th><th>Wkts</th><th>Overs</th><th>Extras</th></tr></thead>
+          <tbody id="card"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js" onerror="console.info('No js/config.js: running without Supabase.')"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
