@@ -3,6 +3,7 @@ const KEY = "cricket-scorer-match-v1";
 
 let m = null;      // current match
 let history = [];  // snapshots for undo
+let signedIn = false; // set by auth.js
 
 // ---------- Supabase (optional) ----------
 let db = null;
@@ -142,7 +143,10 @@ function render() {
   }
   if (m.done) {
     $("result-text").textContent = m.result;
-    $("save-btn").hidden = !db || m.saved;
+    $("save-btn").hidden = !db || !signedIn || m.saved;
+    if (db && !signedIn && !m.saved) {
+      $("save-status").textContent = "Sign in at the top of the page to save this match.";
+    }
   }
 
   $("undo").disabled = history.length === 0;
@@ -213,6 +217,7 @@ $("save-btn").addEventListener("click", async () => {
   m.saved = true;
   save();
   $("save-status").textContent = "Match saved.";
+  if (typeof loadHistory === "function") loadHistory();
   $("save-btn").hidden = true;
 });
 

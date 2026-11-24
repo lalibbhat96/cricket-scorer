@@ -10,6 +10,24 @@
   <header class="top"><h1>Cricket Scorer</h1></header>
 
   <main>
+    <!-- Sign in (shown when Supabase is connected) -->
+    <section id="auth" class="panel" hidden>
+      <form id="auth-form">
+        <h2>Scorer sign in</h2>
+        <p class="small">Only the scorer needs to sign in, to save matches. Everyone can view results.</p>
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button class="primary" type="submit">Sign in</button>
+      </form>
+      <div id="auth-in" hidden>
+        <p>Signed in as <strong id="auth-email"></strong></p>
+        <button id="signout">Sign out</button>
+      </div>
+      <p id="auth-status" class="small" role="status"></p>
+    </section>
+
     <!-- New match -->
     <section id="setup" class="panel">
       <h2>New match</h2>
@@ -78,10 +96,19 @@
         </table>
       </div>
     </section>
+
+    <!-- Past matches (shown when Supabase is connected) -->
+    <section id="history" class="panel" hidden>
+      <h2>Past matches</h2>
+      <ul id="history-list" class="history"></ul>
+      <p id="history-status" class="small" role="status"></p>
+    </section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js" onerror="console.info('No js/config.js: running without Supabase.')"></script>
   <script src="js/main.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

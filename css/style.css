@@ -76,3 +76,14 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 table { width: 100%; border-collapse: collapse; }
 th, td { text-align: left; padding: 0.45rem 0.25rem; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 th { font-size: 0.85rem; color: var(--muted); }
+
+.history { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+.history li { padding: 0.75rem 0.9rem; border: 1px solid var(--line); border-radius: 8px; }
+.history .teams { font-weight: 700; font-variant-numeric: tabular-nums; }
+.history .res { color: var(--grass); font-weight: 600; }
+.history .meta { color: var(--muted); font-size: 0.85rem; }
+@media (prefers-color-scheme: dark) { .history .res { color: var(--gold); } }
+
+#auth h2 { margin-bottom: 0.25rem; }
+#auth .small { color: var(--muted); margin: 0 0 0.5rem; }
+#auth-in button { margin-top: 0.25rem; }
